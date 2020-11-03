@@ -1,0 +1,521 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<SCL xmlns="http://www.iec.ch/61850/2003/SCL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xiGrid="http://wwww.igrid-td.com/SCL.xsd" version="2007" revision="B">
+  <Header id="SCL Example T1-1" nameStructure="IEDName" />
+  <Communication>
+    <SubNetwork name="W01" type="8-MMS">
+      <Text>Station bus</Text>
+      <BitRate unit="b/s">10</BitRate>
+      <ConnectedAP iedName="AS" apName="S1">
+        <Address>
+          <P type="IP">192.168.100.111</P>
+          <P type="IP-SUBNET">255.255.255.0</P>
+          <P type="IP-GATEWAY">0.0.0.0</P>
+          <P type="OSI-PSEL">00000001</P>
+          <P type="OSI-SSEL">0001</P>
+          <P type="OSI-TSEL">0001</P>
+        </Address>
+        <GSE ldInst="00001" cbName="deviceStateGO">
+          <Address>
+            <P type="MAC-Address">01-0C-CD-01-00-01</P>
+            <P type="APPID">2000</P>
+            <P type="VLAN-ID">000</P>
+            <P type="VLAN-PRIORITY">4</P>
+          </Address>
+          <MinTime unit="s">4</MinTime>
+          <MaxTime unit="s">1000</MaxTime>
+        </GSE>
+      </ConnectedAP>
+    </SubNetwork>
+  </Communication>
+  <IED name="AS">
+    <Services nameLength="32">
+      <GetDirectory />
+      <GetDataObjectDefinition />
+      <GetDataSetValue />
+      <DataSetDirectory />
+      <ReadWrite />
+      <FileHandling />
+      <GetCBValues />
+      <ConfDataSet max="4" maxAttributes="50" />
+      <ConfReportControl max="20" />
+      <ConfLogControl max="1" />
+      <ReportSettings bufTime="Dyn" cbName="Conf" rptID="Dyn" datSet="Dyn" intgPd="Dyn" optFields="Dyn" trgOps="Dyn" />
+      <LogSettings cbName="Conf" datSet="Conf" logEna="Conf" trgOps="Conf" intgPd="Conf" />
+      <GSESettings appID="Conf" cbName="Conf" datSet="Conf" dataLabel="Conf" />
+      <GOOSE max="15" />
+      <ConfLNs fixLnInst="true" />
+    </Services>
+    <AccessPoint name="S1">
+      <Server>
+        <Authentication />
+        <LDevice desc="description" inst="00001">
+          <LN0 desc="description" lnType="iGrid_AS_CID_LLN0" lnClass="LLN0" inst="">
+            <DataSet name="DI" desc="Digital Input">
+              <FCDA ldInst="00001" lnClass="GGIO" lnInst="01" prefix="DRE" doName="Ind1" fc="ST" />
+              <FCDA ldInst="00001" lnClass="GGIO" lnInst="02" prefix="DRE" doName="Ind1" fc="ST" />
+            </DataSet>
+			<DataSet name="AI" desc="Analog Input">
+              <FCDA ldInst="00001" lnClass="MMXU" lnInst="01" prefix="DREA" doName="Hz" fc="MX" />
+              <FCDA ldInst="00001" lnClass="MMXU" lnInst="01" prefix="DREA" doName="W" fc="MX" />
+            </DataSet>
+            <ReportControl name="DI01" datSet="DI" rptID="LLN0$BR$DI01" confRev="10000" buffered="true" bufTime="50" intgPd="0" desc="">
+              <TrgOps dchg="true" qchg="true" dupd="true" period="false" gi="true" />
+              <OptFields seqNum="true" timeStamp="true" dataSet="true" reasonCode="true" dataRef="true" entryID="true" configRef="true" bufOvfl="true" />
+              <RptEnabled/>
+            </ReportControl>
+			<ReportControl name="AI01" datSet="AI" rptID="LLN0$UR$AI01" confRev="10000" buffered="false" bufTime="0" intgPd="5000" desc="">
+              <TrgOps dchg="false" qchg="false" dupd="false" period="true" gi="false" />
+              <OptFields seqNum="true" timeStamp="true" dataSet="true" reasonCode="true" dataRef="true" entryID="true" configRef="true" bufOvfl="true" />
+              <RptEnabled/>
+            </ReportControl>
+            <DOI name="Beh">
+              <DAI name="stVal">
+                <Val>on</Val>
+              </DAI>
+            </DOI>
+          </LN0>
+          <LN desc="description" prefix="" lnType="iGrid_AS_CID_LPHD" lnClass="LPHD" inst="1">
+            <DOI name="PhyNam">
+              <DAI name="vendor">
+                <Val>iGrid</Val>
+              </DAI>
+            </DOI>
+            <DOI name="PhyHealth">
+              <DAI name="stVal">
+                <Val>Ok</Val>
+              </DAI>
+            </DOI>
+            <DOI name="Proxy">
+              <DAI name="stVal">
+                <Val>false</Val>
+              </DAI>
+            </DOI>
+          </LN>
+          <LN lnType="iGrid_AS_CID_GGIO" lnClass="GGIO" inst="01" prefix="DRE" />
+          <LN lnType="iGrid_AS_CID_GGIO" lnClass="GGIO" inst="02" prefix="DRE" />
+          <LN lnType="iGrid_AS_CID_GGIO" lnClass="GGIO" inst="03" prefix="DRE" />
+          <LN lnType="iGrid_AS_CID_GGIO" lnClass="GGIO" inst="01" prefix="SRE" />
+          <LN lnType="iGrid_AS_CID_GGIO" lnClass="GGIO" inst="02" prefix="SRE" />
+          <LN lnType="iGrid_AS_CID_GGIO" lnClass="GGIO" inst="03" prefix="SRE" />
+          <LN lnType="iGrid_AS_CID_GGIO_1" lnClass="GGIO" inst="01" prefix="SPI" />
+          <LN lnType="iGrid_AS_CID_GGIO_1" lnClass="GGIO" inst="02" prefix="SPI" />
+          <LN lnType="iGrid_AS_CID_GGIO_2" lnClass="GGIO" inst="03" prefix="SPI" />
+          <LN lnType="iGrid_AS_CID_GGIO_1" lnClass="GGIO" inst="04" prefix="SPI" />
+          <LN lnType="iGrid_AS_CID_GGIO" lnClass="GGIO" inst="05" prefix="SPI" />
+          <LN lnType="iGrid_AS_CID_GGIO_1" lnClass="GGIO" inst="01" prefix="SUP" />
+          <LN lnType="iGrid_AS_CID_GGIO_1" lnClass="GGIO" inst="02" prefix="SUP" />
+          <LN lnType="iGrid_AS_CID_GGIO_2" lnClass="GGIO" inst="03" prefix="SUP" />
+          <LN lnType="iGrid_AS_CID_GGIO_1" lnClass="GGIO" inst="04" prefix="SUP" />
+          <LN lnType="iGrid_AS_CID_GGIO" lnClass="GGIO" inst="05" prefix="SUP" />
+          <LN lnType="iGrid_AS_CID_GGIO" lnClass="GGIO" inst="06" prefix="SUP" />
+          <LN lnType="iGrid_AS_CID_GAPC" lnClass="GAPC" inst="01" prefix="SRE" />
+          <LN lnType="iGrid_AS_CID_GAPC" lnClass="GAPC" inst="01" prefix="SPI" />
+          <LN lnType="iGrid_AS_CID_GAPC" lnClass="GAPC" inst="02" prefix="SPI" />
+          <LN lnType="iGrid_AS_CID_GAPC" lnClass="GAPC" inst="03" prefix="SPI" />
+		  <LN lnType="iGrid_AS_CID_GAPC" lnClass="GAPC" inst="04" prefix="SPI" />
+          <LN lnType="iGrid_AS_CID_GAPC" lnClass="GAPC" inst="01" prefix="SUP" />
+          <LN lnType="iGrid_AS_CID_GAPC" lnClass="GAPC" inst="02" prefix="SUP" />
+          <LN lnType="iGrid_AS_CID_GAPC" lnClass="GAPC" inst="03" prefix="SUP" />
+          <LN lnType="iGrid_AS_CID_GAPC" lnClass="GAPC" inst="04" prefix="SUP" />
+          <LN lnType="iGrid_AS_CID_GGIO_3" lnClass="GGIO" inst="01" />
+          <LN lnType="iGrid_AS_CID_GGIO_3" lnClass="GGIO" inst="02" />
+          <LN lnType="iGrid_AS_CID_GGIO_3" lnClass="GGIO" inst="03" />
+          <LN lnType="iGrid_AS_CID_GGIO_3" lnClass="GGIO" inst="04" />
+          <LN lnType="iGrid_AS_CID_MMXU" lnClass="MMXU" inst="01" prefix="AFCA" />
+          <LN lnType="iGrid_AS_CID_ZBAT" lnClass="ZBAT" inst="01" prefix="AFCA" />
+		  <LN lnType="iGrid_AS_CID_GGIO_5" lnClass="GGIO" inst="01" prefix="AFCA" />
+          <LN lnType="iGrid_AS_CID_MMXU" lnClass="MMXU" inst="02" prefix="AFCA" />
+          <LN lnType="iGrid_AS_CID_ZBAT" lnClass="ZBAT" inst="02" prefix="AFCA" />
+		  <LN lnType="iGrid_AS_CID_GGIO_5" lnClass="GGIO" inst="02" prefix="AFCA" />
+          <LN lnType="iGrid_AS_CID_MMXU" lnClass="MMXU" inst="03" prefix="AFCA" />
+          <LN lnType="iGrid_AS_CID_ZBAT" lnClass="ZBAT" inst="03" prefix="AFCA" />
+		  <LN lnType="iGrid_AS_CID_GGIO_5" lnClass="GGIO" inst="03" prefix="AFCA" />
+          <LN lnType="iGrid_AS_CID_MMXU" lnClass="MMXU" inst="04" prefix="AFCA" />
+          <LN lnType="iGrid_AS_CID_ZBAT" lnClass="ZBAT" inst="04" prefix="AFCA" />
+		  <LN lnType="iGrid_AS_CID_GGIO_5" lnClass="GGIO" inst="04" prefix="AFCA" />
+          <LN lnType="iGrid_AS_CID_MMXU" lnClass="MMXU" inst="05" prefix="AFCA" />
+          <LN lnType="iGrid_AS_CID_ZBAT" lnClass="ZBAT" inst="05" prefix="AFCA" />
+		  <LN lnType="iGrid_AS_CID_GGIO_5" lnClass="GGIO" inst="05" prefix="AFCA" />
+          <LN lnType="iGrid_AS_CID_MMXU" lnClass="MMXU" inst="06" prefix="AFCA" />
+          <LN lnType="iGrid_AS_CID_ZBAT" lnClass="ZBAT" inst="06" prefix="AFCA" />
+		  <LN lnType="iGrid_AS_CID_GGIO_5" lnClass="GGIO" inst="06" prefix="AFCA" />
+          <LN lnType="iGrid_AS_CID_MMXU" lnClass="MMXU" inst="07" prefix="AFCA" />
+          <LN lnType="iGrid_AS_CID_ZBAT" lnClass="ZBAT" inst="07" prefix="AFCA" />
+		  <LN lnType="iGrid_AS_CID_GGIO_5" lnClass="GGIO" inst="07" prefix="AFCA" />
+          <LN lnType="iGrid_AS_CID_MMXU" lnClass="MMXU" inst="08" prefix="AFCA" />
+          <LN lnType="iGrid_AS_CID_ZBAT" lnClass="ZBAT" inst="08" prefix="AFCA" />
+		  <LN lnType="iGrid_AS_CID_GGIO_5" lnClass="GGIO" inst="08" prefix="AFCA" />
+          <LN lnType="iGrid_AS_CID_MMXU" lnClass="MMXU" inst="09" prefix="AFCA" />
+          <LN lnType="iGrid_AS_CID_ZBAT" lnClass="ZBAT" inst="09" prefix="AFCA" />
+		  <LN lnType="iGrid_AS_CID_GGIO_5" lnClass="GGIO" inst="09" prefix="AFCA" />
+          <LN lnType="iGrid_AS_CID_MMXU" lnClass="MMXU" inst="10" prefix="AFCA" />
+          <LN lnType="iGrid_AS_CID_ZBAT" lnClass="ZBAT" inst="10" prefix="AFCA" />
+		  <LN lnType="iGrid_AS_CID_GGIO_5" lnClass="GGIO" inst="10" prefix="AFCA" />
+          <LN lnType="iGrid_AS_CID_GGIO_4" lnClass="GGIO" inst="11" prefix="AFCA" />
+          <LN lnType="iGrid_AS_CID_MMXU" lnClass="MMXU" inst="01" prefix="AFCB" />
+          <LN lnType="iGrid_AS_CID_ZBAT" lnClass="ZBAT" inst="01" prefix="AFCB" />
+		  <LN lnType="iGrid_AS_CID_GGIO_5" lnClass="GGIO" inst="01" prefix="AFCB" />
+          <LN lnType="iGrid_AS_CID_MMXU" lnClass="MMXU" inst="02" prefix="AFCB" />
+          <LN lnType="iGrid_AS_CID_ZBAT" lnClass="ZBAT" inst="02" prefix="AFCB" />
+		  <LN lnType="iGrid_AS_CID_GGIO_5" lnClass="GGIO" inst="02" prefix="AFCB" />
+          <LN lnType="iGrid_AS_CID_MMXU" lnClass="MMXU" inst="03" prefix="AFCB" />
+          <LN lnType="iGrid_AS_CID_ZBAT" lnClass="ZBAT" inst="03" prefix="AFCB" />
+		  <LN lnType="iGrid_AS_CID_GGIO_5" lnClass="GGIO" inst="03" prefix="AFCB" />
+          <LN lnType="iGrid_AS_CID_MMXU" lnClass="MMXU" inst="04" prefix="AFCB" />
+          <LN lnType="iGrid_AS_CID_ZBAT" lnClass="ZBAT" inst="04" prefix="AFCB" />
+		  <LN lnType="iGrid_AS_CID_GGIO_5" lnClass="GGIO" inst="04" prefix="AFCB" />
+          <LN lnType="iGrid_AS_CID_MMXU" lnClass="MMXU" inst="05" prefix="AFCB" />
+          <LN lnType="iGrid_AS_CID_ZBAT" lnClass="ZBAT" inst="05" prefix="AFCB" />
+		  <LN lnType="iGrid_AS_CID_GGIO_5" lnClass="GGIO" inst="05" prefix="AFCB" />
+          <LN lnType="iGrid_AS_CID_MMXU" lnClass="MMXU" inst="06" prefix="AFCB" />
+          <LN lnType="iGrid_AS_CID_ZBAT" lnClass="ZBAT" inst="06" prefix="AFCB" />
+		  <LN lnType="iGrid_AS_CID_GGIO_5" lnClass="GGIO" inst="06" prefix="AFCB" />
+          <LN lnType="iGrid_AS_CID_MMXU" lnClass="MMXU" inst="07" prefix="AFCB" />
+          <LN lnType="iGrid_AS_CID_ZBAT" lnClass="ZBAT" inst="07" prefix="AFCB" />
+		  <LN lnType="iGrid_AS_CID_GGIO_5" lnClass="GGIO" inst="07" prefix="AFCB" />
+          <LN lnType="iGrid_AS_CID_MMXU" lnClass="MMXU" inst="08" prefix="AFCB" />
+          <LN lnType="iGrid_AS_CID_ZBAT" lnClass="ZBAT" inst="08" prefix="AFCB" />
+		  <LN lnType="iGrid_AS_CID_GGIO_5" lnClass="GGIO" inst="08" prefix="AFCB" />
+          <LN lnType="iGrid_AS_CID_MMXU" lnClass="MMXU" inst="09" prefix="AFCB" />
+          <LN lnType="iGrid_AS_CID_ZBAT" lnClass="ZBAT" inst="09" prefix="AFCB" />
+		  <LN lnType="iGrid_AS_CID_GGIO_5" lnClass="GGIO" inst="09" prefix="AFCB" />
+          <LN lnType="iGrid_AS_CID_MMXU" lnClass="MMXU" inst="10" prefix="AFCB" />
+          <LN lnType="iGrid_AS_CID_ZBAT" lnClass="ZBAT" inst="10" prefix="AFCB" />
+		  <LN lnType="iGrid_AS_CID_GGIO_5" lnClass="GGIO" inst="10" prefix="AFCB" />
+          <LN lnType="iGrid_AS_CID_GGIO_4" lnClass="GGIO" inst="11" prefix="AFCB" />
+          <LN lnType="iGrid_AS_CID_GGIO_3" lnClass="GGIO" inst="" prefix="AFCC" />
+          <LN lnType="iGrid_AS_CID_MMXU" lnClass="MMXU" inst="01" prefix="DREA" />
+          <LN lnType="iGrid_AS_CID_ZBAT" lnClass="ZBAT" inst="01" prefix="DREA" />
+		  <LN lnType="iGrid_AS_CID_GGIO_5" lnClass="GGIO" inst="01" prefix="DREA" />
+          <LN lnType="iGrid_AS_CID_MMXU" lnClass="MMXU" inst="02" prefix="DREA" />
+          <LN lnType="iGrid_AS_CID_ZBAT" lnClass="ZBAT" inst="02" prefix="DREA" />
+		  <LN lnType="iGrid_AS_CID_GGIO_5" lnClass="GGIO" inst="02" prefix="DREA" />
+          <LN lnType="iGrid_AS_CID_MMXU" lnClass="MMXU" inst="03" prefix="DREA" />
+          <LN lnType="iGrid_AS_CID_ZBAT" lnClass="ZBAT" inst="03" prefix="DREA" />
+		  <LN lnType="iGrid_AS_CID_GGIO_5" lnClass="GGIO" inst="03" prefix="DREA" />
+          <LN lnType="iGrid_AS_CID_MMXU" lnClass="MMXU" inst="04" prefix="DREA" />
+          <LN lnType="iGrid_AS_CID_ZBAT" lnClass="ZBAT" inst="04" prefix="DREA" />
+		  <LN lnType="iGrid_AS_CID_GGIO_5" lnClass="GGIO" inst="04" prefix="DREA" />
+          <LN lnType="iGrid_AS_CID_MMXU" lnClass="MMXU" inst="05" prefix="DREA" />
+          <LN lnType="iGrid_AS_CID_ZBAT" lnClass="ZBAT" inst="05" prefix="DREA" />
+		  <LN lnType="iGrid_AS_CID_GGIO_5" lnClass="GGIO" inst="05" prefix="DREA" />
+          <LN lnType="iGrid_AS_CID_MMXU" lnClass="MMXU" inst="06" prefix="DREA" />
+          <LN lnType="iGrid_AS_CID_ZBAT" lnClass="ZBAT" inst="06" prefix="DREA" />
+		  <LN lnType="iGrid_AS_CID_GGIO_5" lnClass="GGIO" inst="06" prefix="DREA" />
+          <LN lnType="iGrid_AS_CID_MMXU" lnClass="MMXU" inst="07" prefix="DREA" />
+          <LN lnType="iGrid_AS_CID_ZBAT" lnClass="ZBAT" inst="07" prefix="DREA" />
+		  <LN lnType="iGrid_AS_CID_GGIO_5" lnClass="GGIO" inst="07" prefix="DREA" />
+          <LN lnType="iGrid_AS_CID_MMXU" lnClass="MMXU" inst="08" prefix="DREA" />
+          <LN lnType="iGrid_AS_CID_ZBAT" lnClass="ZBAT" inst="08" prefix="DREA" />
+		  <LN lnType="iGrid_AS_CID_GGIO_5" lnClass="GGIO" inst="08" prefix="DREA" />
+          <LN lnType="iGrid_AS_CID_MMXU" lnClass="MMXU" inst="09" prefix="DREA" />
+          <LN lnType="iGrid_AS_CID_ZBAT" lnClass="ZBAT" inst="09" prefix="DREA" />
+		  <LN lnType="iGrid_AS_CID_GGIO_5" lnClass="GGIO" inst="09" prefix="DREA" />
+          <LN lnType="iGrid_AS_CID_MMXU" lnClass="MMXU" inst="10" prefix="DREA" />
+          <LN lnType="iGrid_AS_CID_ZBAT" lnClass="ZBAT" inst="10" prefix="DREA" />
+		  <LN lnType="iGrid_AS_CID_GGIO_5" lnClass="GGIO" inst="10" prefix="DREA" />
+          <LN lnType="iGrid_AS_CID_GGIO_4" lnClass="GGIO" inst="11" prefix="DREA" />
+          <LN lnType="iGrid_AS_CID_MMXU" lnClass="MMXU" inst="01" prefix="DREB" />
+          <LN lnType="iGrid_AS_CID_ZBAT" lnClass="ZBAT" inst="01" prefix="DREB" />
+		  <LN lnType="iGrid_AS_CID_GGIO_5" lnClass="GGIO" inst="01" prefix="DREB" />
+          <LN lnType="iGrid_AS_CID_MMXU" lnClass="MMXU" inst="02" prefix="DREB" />
+          <LN lnType="iGrid_AS_CID_ZBAT" lnClass="ZBAT" inst="02" prefix="DREB" />
+		  <LN lnType="iGrid_AS_CID_GGIO_5" lnClass="GGIO" inst="02" prefix="DREB" />
+          <LN lnType="iGrid_AS_CID_MMXU" lnClass="MMXU" inst="03" prefix="DREB" />
+          <LN lnType="iGrid_AS_CID_ZBAT" lnClass="ZBAT" inst="03" prefix="DREB" />
+		  <LN lnType="iGrid_AS_CID_GGIO_5" lnClass="GGIO" inst="03" prefix="DREB" />
+          <LN lnType="iGrid_AS_CID_MMXU" lnClass="MMXU" inst="04" prefix="DREB" />
+          <LN lnType="iGrid_AS_CID_ZBAT" lnClass="ZBAT" inst="04" prefix="DREB" />
+		  <LN lnType="iGrid_AS_CID_GGIO_5" lnClass="GGIO" inst="04" prefix="DREB" />
+          <LN lnType="iGrid_AS_CID_MMXU" lnClass="MMXU" inst="05" prefix="DREB" />
+          <LN lnType="iGrid_AS_CID_ZBAT" lnClass="ZBAT" inst="05" prefix="DREB" />
+		  <LN lnType="iGrid_AS_CID_GGIO_5" lnClass="GGIO" inst="05" prefix="DREB" />
+          <LN lnType="iGrid_AS_CID_MMXU" lnClass="MMXU" inst="06" prefix="DREB" />
+          <LN lnType="iGrid_AS_CID_ZBAT" lnClass="ZBAT" inst="06" prefix="DREB" />
+		  <LN lnType="iGrid_AS_CID_GGIO_5" lnClass="GGIO" inst="06" prefix="DREB" />
+          <LN lnType="iGrid_AS_CID_MMXU" lnClass="MMXU" inst="07" prefix="DREB" />
+          <LN lnType="iGrid_AS_CID_ZBAT" lnClass="ZBAT" inst="07" prefix="DREB" />
+		  <LN lnType="iGrid_AS_CID_GGIO_5" lnClass="GGIO" inst="07" prefix="DREB" />
+          <LN lnType="iGrid_AS_CID_MMXU" lnClass="MMXU" inst="08" prefix="DREB" />
+          <LN lnType="iGrid_AS_CID_ZBAT" lnClass="ZBAT" inst="08" prefix="DREB" />
+		  <LN lnType="iGrid_AS_CID_GGIO_5" lnClass="GGIO" inst="08" prefix="DREB" />
+          <LN lnType="iGrid_AS_CID_MMXU" lnClass="MMXU" inst="09" prefix="DREB" />
+          <LN lnType="iGrid_AS_CID_ZBAT" lnClass="ZBAT" inst="09" prefix="DREB" />
+		  <LN lnType="iGrid_AS_CID_GGIO_5" lnClass="GGIO" inst="09" prefix="DREB" />
+          <LN lnType="iGrid_AS_CID_MMXU" lnClass="MMXU" inst="10" prefix="DREB" />
+          <LN lnType="iGrid_AS_CID_ZBAT" lnClass="ZBAT" inst="10" prefix="DREB" />
+		  <LN lnType="iGrid_AS_CID_GGIO_5" lnClass="GGIO" inst="10" prefix="DREB" />
+          <LN lnType="iGrid_AS_CID_GGIO_4" lnClass="GGIO" inst="11" prefix="DREB" />
+          <LN lnType="iGrid_AS_CID_GGIO_3" lnClass="GGIO" inst="" prefix="DREC" />
+          <LN lnType="iGrid_AS_CID_MMXU_1" lnClass="MMXU" inst="01" prefix="SREA" />
+		  <LN lnType="iGrid_AS_CID_GGIO_5" lnClass="GGIO" inst="01" prefix="SREA" />
+		  <LN lnType="iGrid_AS_CID_ZBAT" lnClass="ZBAT" inst="01" prefix="SREA" />
+          <LN lnType="iGrid_AS_CID_MMXU_1" lnClass="MMXU" inst="02" prefix="SREA" />
+		  <LN lnType="iGrid_AS_CID_GGIO_5" lnClass="GGIO" inst="02" prefix="SREA" />
+          <LN lnType="iGrid_AS_CID_ZBAT" lnClass="ZBAT" inst="02" prefix="SREA" />
+          <LN lnType="iGrid_AS_CID_MMXU_1" lnClass="MMXU" inst="03" prefix="SREA" />
+		  <LN lnType="iGrid_AS_CID_GGIO_5" lnClass="GGIO" inst="03" prefix="SREA" />
+          <LN lnType="iGrid_AS_CID_ZBAT" lnClass="ZBAT" inst="03" prefix="SREA" />
+          <LN lnType="iGrid_AS_CID_MMXU_1" lnClass="MMXU" inst="04" prefix="SREA" />
+		  <LN lnType="iGrid_AS_CID_GGIO_5" lnClass="GGIO" inst="04" prefix="SREA" />
+          <LN lnType="iGrid_AS_CID_ZBAT" lnClass="ZBAT" inst="04" prefix="SREA" />
+          <LN lnType="iGrid_AS_CID_MMXU_1" lnClass="MMXU" inst="05" prefix="SREA" />
+		  <LN lnType="iGrid_AS_CID_GGIO_5" lnClass="GGIO" inst="05" prefix="SREA" />
+          <LN lnType="iGrid_AS_CID_ZBAT" lnClass="ZBAT" inst="05" prefix="SREA" />
+          <LN lnType="iGrid_AS_CID_MMXU_1" lnClass="MMXU" inst="06" prefix="SREA" />
+		  <LN lnType="iGrid_AS_CID_GGIO_5" lnClass="GGIO" inst="06" prefix="SREA" />
+          <LN lnType="iGrid_AS_CID_ZBAT" lnClass="ZBAT" inst="06" prefix="SREA" />
+          <LN lnType="iGrid_AS_CID_MMXU_1" lnClass="MMXU" inst="07" prefix="SREA" />
+		  <LN lnType="iGrid_AS_CID_GGIO_5" lnClass="GGIO" inst="07" prefix="SREA" />
+          <LN lnType="iGrid_AS_CID_ZBAT" lnClass="ZBAT" inst="07" prefix="SREA" />
+          <LN lnType="iGrid_AS_CID_MMXU_1" lnClass="MMXU" inst="08" prefix="SREA" />
+		  <LN lnType="iGrid_AS_CID_GGIO_5" lnClass="GGIO" inst="08" prefix="SREA" />
+          <LN lnType="iGrid_AS_CID_ZBAT" lnClass="ZBAT" inst="08" prefix="SREA" />
+          <LN lnType="iGrid_AS_CID_MMXU_1" lnClass="MMXU" inst="09" prefix="SREA" />
+		  <LN lnType="iGrid_AS_CID_GGIO_5" lnClass="GGIO" inst="09" prefix="SREA" />
+          <LN lnType="iGrid_AS_CID_ZBAT" lnClass="ZBAT" inst="09" prefix="SREA" />
+          <LN lnType="iGrid_AS_CID_MMXU_1" lnClass="MMXU" inst="10" prefix="SREA" />
+		  <LN lnType="iGrid_AS_CID_GGIO_5" lnClass="GGIO" inst="10" prefix="SREA" />
+          <LN lnType="iGrid_AS_CID_ZBAT" lnClass="ZBAT" inst="10" prefix="SREA" />
+		  <LN lnType="iGrid_AS_CID_GGIO_4" lnClass="GGIO" inst="11" prefix="SREA" />
+          <LN lnType="iGrid_AS_CID_MMXU_1" lnClass="MMXU" inst="01" prefix="SREB" />
+		  <LN lnType="iGrid_AS_CID_GGIO_5" lnClass="GGIO" inst="01" prefix="SREB" />
+          <LN lnType="iGrid_AS_CID_ZBAT" lnClass="ZBAT" inst="01" prefix="SREB" />
+          <LN lnType="iGrid_AS_CID_MMXU_1" lnClass="MMXU" inst="02" prefix="SREB" />
+		  <LN lnType="iGrid_AS_CID_GGIO_5" lnClass="GGIO" inst="02" prefix="SREB" />
+          <LN lnType="iGrid_AS_CID_ZBAT" lnClass="ZBAT" inst="02" prefix="SREB" />
+          <LN lnType="iGrid_AS_CID_MMXU_1" lnClass="MMXU" inst="03" prefix="SREB" />
+		  <LN lnType="iGrid_AS_CID_GGIO_5" lnClass="GGIO" inst="03" prefix="SREB" />
+          <LN lnType="iGrid_AS_CID_ZBAT" lnClass="ZBAT" inst="03" prefix="SREB" />
+          <LN lnType="iGrid_AS_CID_MMXU_1" lnClass="MMXU" inst="04" prefix="SREB" />
+		  <LN lnType="iGrid_AS_CID_GGIO_5" lnClass="GGIO" inst="04" prefix="SREB" />
+          <LN lnType="iGrid_AS_CID_ZBAT" lnClass="ZBAT" inst="04" prefix="SREB" />
+          <LN lnType="iGrid_AS_CID_MMXU_1" lnClass="MMXU" inst="05" prefix="SREB" />
+		  <LN lnType="iGrid_AS_CID_GGIO_5" lnClass="GGIO" inst="05" prefix="SREB" />
+          <LN lnType="iGrid_AS_CID_ZBAT" lnClass="ZBAT" inst="05" prefix="SREB" />
+          <LN lnType="iGrid_AS_CID_MMXU_1" lnClass="MMXU" inst="06" prefix="SREB" />
+		  <LN lnType="iGrid_AS_CID_GGIO_5" lnClass="GGIO" inst="06" prefix="SREB" />
+          <LN lnType="iGrid_AS_CID_ZBAT" lnClass="ZBAT" inst="06" prefix="SREB" />
+          <LN lnType="iGrid_AS_CID_MMXU_1" lnClass="MMXU" inst="07" prefix="SREB" />
+		  <LN lnType="iGrid_AS_CID_GGIO_5" lnClass="GGIO" inst="07" prefix="SREB" />
+          <LN lnType="iGrid_AS_CID_ZBAT" lnClass="ZBAT" inst="07" prefix="SREB" />
+          <LN lnType="iGrid_AS_CID_MMXU_1" lnClass="MMXU" inst="08" prefix="SREB" />
+		  <LN lnType="iGrid_AS_CID_GGIO_5" lnClass="GGIO" inst="08" prefix="SREB" />
+          <LN lnType="iGrid_AS_CID_ZBAT" lnClass="ZBAT" inst="08" prefix="SREB" />
+          <LN lnType="iGrid_AS_CID_MMXU_1" lnClass="MMXU" inst="09" prefix="SREB" />
+		  <LN lnType="iGrid_AS_CID_GGIO_5" lnClass="GGIO" inst="09" prefix="SREB" />
+          <LN lnType="iGrid_AS_CID_ZBAT" lnClass="ZBAT" inst="09" prefix="SREB" />
+          <LN lnType="iGrid_AS_CID_MMXU_1" lnClass="MMXU" inst="10" prefix="SREB" />
+		  <LN lnType="iGrid_AS_CID_GGIO_5" lnClass="GGIO" inst="10" prefix="SREB" />
+          <LN lnType="iGrid_AS_CID_ZBAT" lnClass="ZBAT" inst="10" prefix="SREB" />
+		  <LN lnType="iGrid_AS_CID_GGIO_4" lnClass="GGIO" inst="11" prefix="SREB" />
+          <LN lnType="iGrid_AS_CID_GGIO_3" lnClass="GGIO" inst="" prefix="SREC" />
+          
+        </LDevice>
+      </Server>
+    </AccessPoint>
+  </IED>
+  <DataTypeTemplates>
+    <LNodeType id="iGrid_AS_CID_LLN0" lnClass="LLN0">
+      <DO name="Beh" type="iGrid_AS_CID_ENS" />
+    </LNodeType>
+    <LNodeType id="iGrid_AS_CID_LPHD" lnClass="LPHD">
+      <DO name="PhyNam" type="iGrid_AS_CID_DPL" />
+      <DO name="PhyHealth" type="iGrid_AS_CID_ENS_Health" />
+      <DO name="Proxy" type="iGrid_AS_CID_SPS" />
+    </LNodeType>
+    <LNodeType id="iGrid_AS_CID_GGIO" lnClass="GGIO">
+      <DO name="Beh" type="iGrid_AS_CID_ENS" />
+      <DO name="EEHealth" type="iGrid_AS_CID_ENS_Health" />
+      <DO name="Ind1" type="iGrid_AS_CID_SPS" />
+      <DO name="IntIn1" type="iGrid_AS_CID_INS" />
+    </LNodeType>
+    <LNodeType id="iGrid_AS_CID_GGIO_1" lnClass="GGIO">
+      <DO name="Beh" type="iGrid_AS_CID_ENS" />
+      <DO name="EEHealth" type="iGrid_AS_CID_ENS_Health" />
+      <DO name="AnOut1" type="iGrid_AS_CID_APC" />
+      <DO name="AnOut2" type="iGrid_AS_CID_APC" />
+      <DO name="Ind1" type="iGrid_AS_CID_SPS" />
+      <DO name="IntIn1" type="iGrid_AS_CID_INS" />
+    </LNodeType>
+    <LNodeType id="iGrid_AS_CID_GGIO_2" lnClass="GGIO">
+      <DO name="Beh" type="iGrid_AS_CID_ENS" />
+      <DO name="EEHealth" type="iGrid_AS_CID_ENS_Health" />
+      <DO name="AnOut1" type="iGrid_AS_CID_APC_1" />
+      <DO name="Ind1" type="iGrid_AS_CID_SPS" />
+      <DO name="IntIn1" type="iGrid_AS_CID_INS" />
+    </LNodeType>
+    <LNodeType id="iGrid_AS_CID_GAPC" lnClass="GAPC">
+      <DO name="Beh" type="iGrid_AS_CID_ENS" />
+      <DO name="Str1" type="iGrid_AS_CID_ACD" />
+      <DO name="Op1" type="iGrid_AS_CID_ACT" />
+      <DO name="SPCSO1" type="iGrid_AS_CID_SPC" />
+    </LNodeType>
+    <LNodeType id="iGrid_AS_CID_GGIO_3" lnClass="GGIO">
+      <DO name="Beh" type="iGrid_AS_CID_ENS" />
+      <DO name="EEHealth" type="iGrid_AS_CID_ENS_Health" />
+      <DO name="IntIn1" type="iGrid_AS_CID_INS" />
+    </LNodeType>
+    <LNodeType id="iGrid_AS_CID_MMXU" lnClass="MMXU">
+      <DO name="Beh" type="iGrid_AS_CID_ENS" />
+      <DO name="Hz" type="iGrid_AS_CID_MV" />
+      <DO name="PF" type="iGrid_AS_CID_WYE" />
+      <DO name="PhV" type="iGrid_AS_CID_WYE" />
+      <DO name="VAr" type="iGrid_AS_CID_WYE" />
+      <DO name="W" type="iGrid_AS_CID_WYE" />
+    </LNodeType>
+    <LNodeType id="iGrid_AS_CID_ZBAT" lnClass="ZBAT">
+      <DO name="Beh" type="iGrid_AS_CID_ENS" />
+      <DO name="EEHealth" type="iGrid_AS_CID_ENS_Health" />
+      <DO name="BatSt" type="iGrid_AS_CID_SPS" />
+      <DO name="InBatV" type="iGrid_AS_CID_MV" />
+    </LNodeType>
+    <LNodeType id="iGrid_AS_CID_GGIO_4" lnClass="GGIO">
+      <DO name="Beh" type="iGrid_AS_CID_ENS" />
+      <DO name="EEHealth" type="iGrid_AS_CID_ENS_Health" />
+      <DO name="AnIn1" type="iGrid_AS_CID_MV" />
+    </LNodeType>
+    <LNodeType id="iGrid_AS_CID_MMXU_1" lnClass="MMXU">
+      <DO name="Beh" type="iGrid_AS_CID_ENS" />
+      <DO name="Hz" type="iGrid_AS_CID_MV" />
+      <DO name="PhV" type="iGrid_AS_CID_WYE" />
+      <DO name="W" type="iGrid_AS_CID_WYE" />
+    </LNodeType>
+    <LNodeType id="iGrid_AS_CID_GGIO_5" lnClass="GGIO">
+      <DO name="AnIn1" type="iGrid_AS_CID_MV_1" />
+      <DO name="AnIn2" type="iGrid_AS_CID_MV_1" />
+      <DO name="Beh" type="iGrid_AS_CID_ENS" />
+      <DO name="EEHealth" type="iGrid_AS_CID_ENS_Health" />
+    </LNodeType>
+    <DOType id="iGrid_AS_CID_ENS" cdc="ENS">
+      <DA name="stVal" fc="ST" bType="Enum" type="Beh" dchg="true" dupd="true" />
+      <DA name="q" fc="ST" bType="Quality" qchg="true" />
+      <DA name="t" fc="ST" bType="Timestamp" />
+    </DOType>
+    <DOType id="iGrid_AS_CID_DPL" cdc="DPL">
+      <DA name="vendor" fc="DC" bType="VisString255" />
+    </DOType>
+    <DOType id="iGrid_AS_CID_ENS_Health" cdc="ENS">
+      <DA name="stVal" fc="ST" bType="Enum" type="Health" dchg="true" dupd="true" />
+      <DA name="q" fc="ST" bType="Quality" qchg="true" />
+      <DA name="t" fc="ST" bType="Timestamp" />
+    </DOType>
+    <DOType id="iGrid_AS_CID_SPS" cdc="SPS">
+      <DA name="stVal" fc="ST" bType="BOOLEAN" dchg="true" />
+      <DA name="q" fc="ST" bType="Quality" qchg="true" />
+      <DA name="t" fc="ST" bType="Timestamp" />
+    </DOType>
+    <DOType id="iGrid_AS_CID_INS" cdc="INS">
+      <DA name="stVal" fc="ST" bType="INT32" dchg="true" />
+      <DA name="q" fc="ST" bType="Quality" qchg="true" />
+      <DA name="t" fc="ST" bType="Timestamp" />
+    </DOType>
+    <DOType id="iGrid_AS_CID_APC" cdc="APC">
+      <DA name="Oper" fc="CO" bType="Struct" type="iGrid_AS_CID_APCOperate" />
+      <DA name="ctlModel" fc="CF" bType="Enum" type="ctlModelEnum" />
+    </DOType>
+    <DOType id="iGrid_AS_CID_APC_1" cdc="APC">
+      <DA name="Oper" fc="CO" bType="Struct" type="iGrid_AS_CID_APCOperate_1" />
+      <DA name="ctlModel" fc="CF" bType="Enum" type="ctlModelEnum" />
+    </DOType>
+    <DOType id="iGrid_AS_CID_ACD" cdc="ACD">
+      <DA name="general" fc="ST" bType="BOOLEAN" dchg="true" />
+      <DA name="dirGeneral" fc="ST" bType="Enum" type="dirGeneralEnum" dchg="true" />
+      <DA name="q" fc="ST" bType="Quality" qchg="true" />
+      <DA name="t" fc="ST" bType="Timestamp" />
+    </DOType>
+    <DOType id="iGrid_AS_CID_ACT" cdc="ACT">
+      <DA name="general" fc="ST" bType="BOOLEAN" dchg="true" />
+      <DA name="q" fc="ST" bType="Quality" qchg="true" />
+      <DA name="t" fc="ST" bType="Timestamp" />
+    </DOType>
+    <DOType id="iGrid_AS_CID_SPC" cdc="SPC">
+      <DA name="Oper" fc="CO" bType="Struct" type="iGrid_AS_CID_SPCOperate" />
+      <DA name="ctlModel" fc="CF" bType="Enum" type="ctlModelEnum" />
+    </DOType>
+    <DOType id="iGrid_AS_CID_MV" cdc="MV">
+      <DA name="mag" fc="MX" bType="Struct" type="iGrid_AS_CID_AnalogueValue_1" dchg="true" />
+      <DA name="q" fc="MX" bType="Quality" qchg="true" />
+      <DA name="t" fc="MX" bType="Timestamp" />
+    </DOType>
+    <DOType id="iGrid_AS_CID_CMV" cdc="CMV">
+      <DA name="cVal" fc="MX" bType="Struct" type="iGrid_AS_CID_Vector" dchg="true" />
+      <DA name="q" fc="MX" bType="Quality" qchg="true" />
+      <DA name="t" fc="MX" bType="Timestamp" />
+    </DOType>
+    <DOType id="iGrid_AS_CID_WYE" cdc="WYE">
+      <SDO name="phsA" type="iGrid_AS_CID_CMV" />
+      <SDO name="phsB" type="iGrid_AS_CID_CMV" />
+      <SDO name="phsC" type="iGrid_AS_CID_CMV" />
+    </DOType>
+    <DOType id="iGrid_AS_CID_MV_1" cdc="MV">
+      <DA name="mag" fc="MX" bType="Struct" type="iGrid_AS_CID_AnalogueValue" dchg="true" />
+      <DA name="q" fc="MX" bType="Quality" qchg="true" />
+      <DA name="t" fc="MX" bType="Timestamp" />
+    </DOType>
+    <DAType id="iGrid_AS_CID_AnalogueValue">
+      <BDA name="i" bType="INT32" />
+    </DAType>
+    <DAType id="iGrid_AS_CID_Originator">
+      <BDA name="orCat" bType="Enum" type="orCatEnum" />
+      <BDA name="orIdent" bType="Octet64" />
+    </DAType>
+    <DAType id="iGrid_AS_CID_APCOperate">
+      <BDA name="ctlVal" bType="Struct" type="iGrid_AS_CID_AnalogueValue" />
+      <BDA name="origin" bType="Struct" type="iGrid_AS_CID_Originator" />
+      <BDA name="ctlNum" bType="INT8U" />
+    </DAType>
+    <DAType id="iGrid_AS_CID_AnalogueValue_1">
+      <BDA name="i" bType="INT32" />
+    </DAType>
+    <DAType id="iGrid_AS_CID_APCOperate_1">
+      <BDA name="ctlVal" bType="Struct" type="iGrid_AS_CID_AnalogueValue_1" />
+      <BDA name="origin" bType="Struct" type="iGrid_AS_CID_Originator" />
+      <BDA name="ctlNum" bType="INT8U" />
+    </DAType>
+    <DAType id="iGrid_AS_CID_SPCOperate">
+      <BDA name="ctlVal" bType="BOOLEAN" />
+      <BDA name="origin" bType="Struct" type="iGrid_AS_CID_Originator" />
+      <BDA name="ctlNum" bType="INT8U" />
+    </DAType>
+    <DAType id="iGrid_AS_CID_Vector">
+      <BDA name="mag" bType="Struct" type="iGrid_AS_CID_AnalogueValue_1" />
+    </DAType>
+    <EnumType id="Beh">
+      <EnumVal ord="1">on</EnumVal>
+      <EnumVal ord="2">blocked</EnumVal>
+      <EnumVal ord="3">test</EnumVal>
+      <EnumVal ord="4">test/blocked</EnumVal>
+      <EnumVal ord="5">off</EnumVal>
+    </EnumType>
+    <EnumType id="Health">
+      <EnumVal ord="1">Ok</EnumVal>
+      <EnumVal ord="2">Warning</EnumVal>
+      <EnumVal ord="3">Alarm</EnumVal>
+    </EnumType>
+    <EnumType id="orCatEnum">
+      <EnumVal ord="0">not-supported</EnumVal>
+      <EnumVal ord="1">bay-control</EnumVal>
+      <EnumVal ord="2">station-control</EnumVal>
+      <EnumVal ord="3">remote-control</EnumVal>
+      <EnumVal ord="4">automatic-bay</EnumVal>
+      <EnumVal ord="5">automatic-station</EnumVal>
+      <EnumVal ord="6">automatic-remote</EnumVal>
+      <EnumVal ord="7">maintenance</EnumVal>
+      <EnumVal ord="8">process</EnumVal>
+    </EnumType>
+    <EnumType id="ctlModelEnum">
+      <EnumVal ord="0">status-only</EnumVal>
+      <EnumVal ord="1">direct-with-normal-security</EnumVal>
+      <EnumVal ord="2">sbo-with-normal-security</EnumVal>
+      <EnumVal ord="3">direct-with-enhanced-security</EnumVal>
+      <EnumVal ord="4">sbo-with-enhanced-security</EnumVal>
+    </EnumType>
+    <EnumType id="dirGeneralEnum">
+      <EnumVal ord="0">unknown</EnumVal>
+      <EnumVal ord="1">forward</EnumVal>
+      <EnumVal ord="2">backward</EnumVal>
+      <EnumVal ord="3">both</EnumVal>
+    </EnumType>
+  </DataTypeTemplates>
+</SCL>
