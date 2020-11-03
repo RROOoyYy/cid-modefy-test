@@ -7,8 +7,8 @@
       <BitRate unit="b/s">10</BitRate>
       <ConnectedAP iedName="AS" apName="S1">
         <Address>
-          <P type="IP">192.168.100.111</P>
-          <P type="IP-SUBNET">255.255.255.0</P>
+          <P type="IP">192.168.100.199</P>
+          <P type="IP-SUBNET">255.240.0.0</P>
           <P type="IP-GATEWAY">0.0.0.0</P>
           <P type="OSI-PSEL">00000001</P>
           <P type="OSI-SSEL">0001</P>
@@ -91,9 +91,11 @@
               </DAI>
             </DOI>
           </LN>
-          <LN lnType="iGrid_AS_CID_GGIO" lnClass="GGIO" inst="01" prefix="cid" />
-          <LN lnType="iGrid_AS_CID_GGIO" lnClass="GGIO" inst="02" prefix="mode" />
-          <LN lnType="iGrid_AS_CID_GGIO" lnClass="GGIO" inst="03" prefix="test" />
+          <LN lnType="iGrid_AS_CID_GGIO" lnClass="GGIO" inst="01" prefix="ICP" />
+          <LN lnType="iGrid_AS_CID_GGIO" lnClass="GGIO" inst="02" prefix="AFC" />
+          <LN lnType="iGrid_AS_CID_GGIO" lnClass="GGIO" inst="03" prefix="TEST" />
+          <LN lnType="iGrid_AS_CID_GGIO" lnClass="GGIO" inst="01" prefix="CID" />
+          <LN lnType="iGrid_AS_CID_GGIO" lnClass="GGIO" inst="02" prefix="MOD" />
           <LN lnType="iGrid_AS_CID_GGIO" lnClass="GGIO" inst="01" prefix="DRE" />
           <LN lnType="iGrid_AS_CID_GGIO" lnClass="GGIO" inst="02" prefix="DRE" />
           <LN lnType="iGrid_AS_CID_GGIO" lnClass="GGIO" inst="03" prefix="DRE" />
