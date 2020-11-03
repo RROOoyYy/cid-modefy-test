@@ -91,6 +91,9 @@
               </DAI>
             </DOI>
           </LN>
+          <LN lnType="iGrid_AS_CID_GGIO" lnClass="GGIO" inst="01" prefix="cid" />
+          <LN lnType="iGrid_AS_CID_GGIO" lnClass="GGIO" inst="02" prefix="mode" />
+          <LN lnType="iGrid_AS_CID_GGIO" lnClass="GGIO" inst="03" prefix="test" />
           <LN lnType="iGrid_AS_CID_GGIO" lnClass="GGIO" inst="01" prefix="DRE" />
           <LN lnType="iGrid_AS_CID_GGIO" lnClass="GGIO" inst="02" prefix="DRE" />
           <LN lnType="iGrid_AS_CID_GGIO" lnClass="GGIO" inst="03" prefix="DRE" />
